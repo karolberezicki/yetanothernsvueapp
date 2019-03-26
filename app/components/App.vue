@@ -6,14 +6,7 @@
         <Label class="message" :text="msg" col="0" row="0"/>
         <Button text="Tap me!!" @tap="onButtonTap" col="0" row="1"/>
       </GridLayout>
-      <!-- <Image
-        :src="currentImage"
-        stretch="aspectFit"
-        @tap="onImageTap"
-        @longPress="onImageLongPress"
-        @swipe="onSwipe"
-      /> -->
-      <Gallery />
+      <Gallery/>
     </StackLayout>
   </Page>
 </template>

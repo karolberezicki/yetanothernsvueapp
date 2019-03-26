@@ -1,6 +1,6 @@
 <template>
   <StackLayout>
-      <Label text="Swipe to view more!"/>
+    <Label text="Swipe to view more!"/>
     <Image
       :src="currentImage"
       stretch="aspectFit"
@@ -15,8 +15,8 @@
 <script lang="ts" src="./Gallery.ts"></script>
 
 <style scoped>
- Label {
-     color: #fff;
-     font-size: 32
- }
+label {
+  color: #fff;
+  font-size: 32;
+}
 </style>
