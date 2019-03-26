@@ -1,0 +1,19 @@
+ActionBar {
+    background-color: #53ba82;
+    color: #ffffff;
+}
+
+.message {
+    vertical-align: center;
+    text-align: center;
+    font-size: 20;
+    color: #333333;
+}
+
+Button {
+	background:linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
+	border-radius:10;
+	color:#ffffff;
+}
+
+
