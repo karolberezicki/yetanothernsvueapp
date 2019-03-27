@@ -1,23 +1,31 @@
 import { Vue, Component } from "vue-property-decorator";
-import { SwipeDirection } from "tns-core-modules/ui/gestures";
+import { SwipeDirection, SwipeGestureEventData } from "tns-core-modules/ui/gestures";
 import { action } from "tns-core-modules/ui/dialogs";
 import * as clipboard from "nativescript-clipboard";
 import * as Toast from "nativescript-toast";
 import * as SocialShare from "nativescript-social-share";
 import { Vibrate } from "nativescript-vibrate";
+import { CatApi } from '@/shared/CatApi'
+import axios from 'axios'
 
 @Component
 export default class Gallery extends Vue {
+  cats: CatApi.SearchResult[] = [];
   index = 0;
-  imageSources = [
-    "https://images.pexels.com/photos/1405773/pexels-photo-1405773.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    "https://images.pexels.com/photos/921294/pexels-photo-921294.png?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    "https://images.pexels.com/photos/1352196/pexels-photo-1352196.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    "https://images.pexels.com/photos/1552224/pexels-photo-1552224.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    "https://images.pexels.com/photos/1094246/pexels-photo-1094246.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    "https://images.pexels.com/photos/1198817/pexels-photo-1198817.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    "https://images.pexels.com/photos/1586473/pexels-photo-1586473.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-  ];
+
+  created() {
+    console.log("Created!");
+    axios.request<CatApi.SearchResult[]>({
+      url: 'https://api.thecatapi.com/v1/images/search?limit=10&page=1&order=Desc'
+    }).then((response) => {
+      this.cats = response.data;
+      console.log("Cats loaded!");
+    });
+  }
+
+  get imageSources() {
+    return this.cats.map(c => c.url);
+  }
 
   get currentImage() {
     return this.imageSources[this.index];
@@ -61,12 +69,14 @@ export default class Gallery extends Vue {
     });
   }
 
-  onSwipe(args) {
+  onSwipe(args: SwipeGestureEventData) {
     if (args.direction === SwipeDirection.left) {
       this.nextImage();
+      return;
     }
     if (args.direction === SwipeDirection.right) {
       this.previousImage();
+      return;
     }
   }
 }
