@@ -110,6 +110,8 @@ module.exports = env => {
             "setImmediate": false,
             "fs": "empty",
             "__dirname": false,
+            net: "empty",
+            tls: "empty",
         },
         devtool: "source-map",
         optimization: {

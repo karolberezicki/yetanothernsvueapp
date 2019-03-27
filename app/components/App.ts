@@ -1,7 +1,7 @@
 import { Vue, Component } from "vue-property-decorator";
 import { GestureEventData } from "tns-core-modules/ui/gestures";
 
-import Gallery from "@/components/Gallery";
+import Gallery from "./Gallery.vue";
 
 @Component({
   components: {
